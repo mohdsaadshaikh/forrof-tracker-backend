@@ -1,0 +1,16 @@
+# Dependencies
+node_modules
+
+# yarn error logs
+yarn-error.log
+
+# Environment varibales
+.env*
+!.env*.example
+src/generated/
+
+
+# Code coverage
+coverage
+
+/src/generated/prisma
