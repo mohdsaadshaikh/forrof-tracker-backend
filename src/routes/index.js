@@ -2,18 +2,15 @@ import { ENV } from '../config/env.js'
 import express from 'express'
 
 import docsRoute from './docs.route.js'
+import userRoute from './user.route.js'
 
 const router = express.Router()
 
 const defaultRoutes = [
-  // {
-  //   path: '/auth',
-  //   route: authRoute,
-  // },
-  // {
-  //   path: '/users',
-  //   route: userRoute,
-  // },
+  {
+    path: '/user',
+    route: userRoute,
+  },
 ]
 
 const devRoutes = [

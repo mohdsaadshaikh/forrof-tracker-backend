@@ -18,12 +18,12 @@ const app = express()
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://forrof-tracker.vercel.app'],
     credentials: true,
   })
 )
 
-app.all('/api/auth/{*any}', toNodeHandler(auth))
+app.all('/api/auth/*splat', toNodeHandler(auth))
 
 if (ENV.NODE_ENV === 'development') {
   app.use(successHandler)
