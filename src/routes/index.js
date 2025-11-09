@@ -3,6 +3,7 @@ import express from 'express'
 
 import docsRoute from './docs.route.js'
 import userRoute from './user.route.js'
+import announcementsRoute from './announcements.route.js'
 
 const router = express.Router()
 
@@ -11,10 +12,13 @@ const defaultRoutes = [
     path: '/user',
     route: userRoute,
   },
+  {
+    path: '/announcements',
+    route: announcementsRoute,
+  },
 ]
 
 const devRoutes = [
-  // routes available only in development mode
   {
     path: '/docs',
     route: docsRoute,

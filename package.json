@@ -9,6 +9,7 @@
     "start": "node src/index.js",
     "prod": "NODE_ENV=production node src/index.js",
     "lint": "eslint .",
+    "postinstall": "prisma generate",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "prepare": "husky install",

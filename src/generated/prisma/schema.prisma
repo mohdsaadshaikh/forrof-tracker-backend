@@ -15,15 +15,16 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String         @id
   name          String
   email         String
-  emailVerified Boolean   @default(false)
+  emailVerified Boolean        @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now()) @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now()) @updatedAt
   sessions      Session[]
   accounts      Account[]
+  announcements Announcement[]
 
   @@unique([email])
   @@map("user")
@@ -72,4 +73,30 @@ model Verification {
   updatedAt  DateTime @default(now()) @updatedAt
 
   @@map("verification")
+}
+
+model Announcement {
+  id          String               @id @default(uuid())
+  title       String
+  description String
+  category    AnnouncementCategory
+  department  String?
+  // sendEmail   Boolean      @default(false)
+  // publishDate DateTime?    
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id])
+
+  @@map("announcements")
+}
+
+enum AnnouncementCategory {
+  holiday
+  update
+  urgent
+  birthday
+  policy
 }

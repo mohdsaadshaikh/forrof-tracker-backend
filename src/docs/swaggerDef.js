@@ -12,7 +12,7 @@ const swaggerDef = {
   },
   servers: [
     {
-      url: `http://localhost:${ENV.PORT}/v1`,
+      url: `http://localhost:${ENV.PORT}/api`,
     },
   ],
 }
