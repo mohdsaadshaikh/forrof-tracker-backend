@@ -53,6 +53,13 @@ export const auth = betterAuth({
       enabled: true,
     },
   },
+
+  cookies: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+  },
+
   trustedOrigins: ['http://localhost:5173', 'https://forrof-tracker.vercel.app/'],
 
   secret: process.env.BETTER_AUTH_SECRET,
