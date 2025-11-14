@@ -19,6 +19,13 @@ export const auth = betterAuth({
       })
     },
   },
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: 'none',
+      secure: true,
+      httpOnly: true,
+    },
+  },
   emailVerification: {
     sendVerificationEmail: async ({ user, token }, request) => {
       const url = new URL(request.url)
@@ -52,13 +59,6 @@ export const auth = betterAuth({
     changeEmail: {
       enabled: true,
     },
-  },
-
-  cookies: {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    sameSite: 'none',
   },
 
   trustedOrigins: [
