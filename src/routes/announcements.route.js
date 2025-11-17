@@ -1,38 +1,35 @@
+// routes/announcements.js
 import express from 'express'
-import validate from '../middlewares/validate.js'
-import {
-  createAnnouncementSchema,
-  updateAnnouncementSchema,
-  listAnnouncementSchema,
-} from '../validations/announcements.js'
+import { requirePermission } from '../middlewares/requirePermission.js'
 import announcementsController from '../controllers/announcements.controller.js'
-import { requireAuth } from '../middlewares/authMiddleware.js'
 
 const router = express.Router()
 
 router.get(
   '/',
-  requireAuth,
-  validate(listAnnouncementSchema, 'query'),
+  requirePermission('announcement', 'read'),
   announcementsController.listAnnouncements
 )
-
-router.get('/:id', announcementsController.getAnnouncement)
+router.get(
+  '/:id',
+  requirePermission('announcement', 'read'),
+  announcementsController.getAnnouncement
+)
 
 router.post(
   '/',
-  requireAuth,
-  validate(createAnnouncementSchema, 'body'),
+  requirePermission('announcement', 'create'),
   announcementsController.createAnnouncement
 )
-
 router.put(
   '/:id',
-  requireAuth,
-  validate(updateAnnouncementSchema, 'body'),
+  requirePermission('announcement', 'update'),
   announcementsController.updateAnnouncement
 )
-
-router.delete('/:id', requireAuth, announcementsController.deleteAnnouncement)
+router.delete(
+  '/:id',
+  requirePermission('announcement', 'delete'),
+  announcementsController.deleteAnnouncement
+)
 
 export default router

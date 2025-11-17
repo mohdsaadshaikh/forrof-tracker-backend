@@ -3,6 +3,8 @@ import { prismaAdapter } from 'better-auth/adapters/prisma'
 import prisma from '../config/prisma.js'
 import { sendEmail } from './mailer.js'
 import { loadEmailTemplate } from '../utils/loadTemplate.js'
+import { admin as adminPlugin } from 'better-auth/plugins'
+import { ac, admin, employee } from './permission.js'
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -11,19 +13,13 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
+    autoSignIn: false,
     sendResetPassword: async ({ user, url, token }, request) => {
       await sendEmail({
         to: user.email,
         subject: 'Reset your password',
         text: `Click the link to reset your password: ${url}`,
       })
-    },
-  },
-  advanced: {
-    defaultCookieAttributes: {
-      sameSite: 'none',
-      secure: true,
-      httpOnly: true,
     },
   },
   emailVerification: {
@@ -53,14 +49,30 @@ export const auth = betterAuth({
 
     sendOnSignUp: true,
     sendOnSignIn: true,
+
     autoSignInAfterVerification: true,
   },
   user: {
-    changeEmail: {
-      enabled: true,
+    changeEmail: { enabled: true },
+  },
+  plugins: [
+    adminPlugin({
+      ac,
+      roles: {
+        admin,
+        employee,
+      },
+      defaultRole: 'employee',
+      adminRoles: ['admin'],
+    }),
+  ],
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: 'none',
+      secure: true,
+      httpOnly: true,
     },
   },
-
   trustedOrigins: [
     'http://localhost:5173',
     'https://forrof-tracker.vercel.app/',
