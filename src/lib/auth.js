@@ -72,6 +72,7 @@ export const auth = betterAuth({
       secure: true,
       httpOnly: true,
     },
+    disableCSRFCheck: true,
   },
   trustedOrigins: [
     'http://localhost:5173',
