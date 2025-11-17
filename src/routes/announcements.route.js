@@ -1,4 +1,3 @@
-// routes/announcements.js
 import express from 'express'
 import { requirePermission } from '../middlewares/requirePermission.js'
 import announcementsController from '../controllers/announcements.controller.js'
@@ -23,7 +22,7 @@ router.post(
 )
 router.put(
   '/:id',
-  requirePermission('announcement', 'update'),
+  requirePermission('announcement', 'edit'),
   announcementsController.updateAnnouncement
 )
 router.delete(
