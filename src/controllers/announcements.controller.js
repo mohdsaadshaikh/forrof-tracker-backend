@@ -8,6 +8,31 @@ export const listAnnouncements = catchAsync(async (req, res) => {
   res.json(result)
 })
 
+export const listEmployeeAnnouncements = catchAsync(async (req, res) => {
+  const user = req.user
+  const { page, limit, category } = req.query
+
+  if (!user.department) {
+    return res.json({
+      meta: {
+        page: 1,
+        limit: 10,
+        total: 0,
+        totalPages: 0,
+      },
+      data: [],
+    })
+  }
+
+  const result = await announcementsService.list({
+    page,
+    limit,
+    category,
+    department: user.department,
+  })
+  res.json(result)
+})
+
 export const getAnnouncement = catchAsync(async (req, res) => {
   const announcement = await announcementsService.getById(req.params.id)
   if (!announcement) throw new ApiError(404, 'Announcement not found')
@@ -54,6 +79,7 @@ export const deleteAnnouncement = catchAsync(async (req, res) => {
 
 export default {
   listAnnouncements,
+  listEmployeeAnnouncements,
   getAnnouncement,
   createAnnouncement,
   updateAnnouncement,

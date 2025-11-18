@@ -12,9 +12,19 @@ export async function list({
   page = Number(page) || DEFAULT_PAGE
   limit = Math.min(Number(limit) || DEFAULT_LIMIT, 100)
 
-  const where = {}
-  if (category) where.category = category
-  if (department) where.department = department
+  const whereConditions = []
+
+  if (category) {
+    whereConditions.push({ category })
+  }
+
+  if (department) {
+    whereConditions.push({
+      OR: [{ department: department }, { department: null }, { department: '' }],
+    })
+  }
+
+  const where = whereConditions.length > 0 ? { AND: whereConditions } : {}
 
   const [items, total] = await Promise.all([
     prisma.announcement.findMany({
@@ -22,19 +32,21 @@ export async function list({
       orderBy: { createdAt: 'desc' },
       skip: (page - 1) * limit,
       take: limit,
-      include: { createdBy: { select: { id: true, name: true, email: true } } },
+      include: {
+        createdBy: {
+          select: { id: true, name: true, email: true },
+        },
+      },
     }),
     prisma.announcement.count({ where }),
   ])
-
-  const totalPages = Math.ceil(total / limit)
 
   return {
     meta: {
       page,
       limit,
       total,
-      totalPages,
+      totalPages: Math.ceil(total / limit),
     },
     data: items,
   }

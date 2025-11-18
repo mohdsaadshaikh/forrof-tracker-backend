@@ -129,6 +129,7 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   role: 'role',
+  department: 'department',
   banned: 'banned',
   banReason: 'banReason',
   banExpires: 'banExpires'
@@ -182,6 +183,19 @@ exports.Prisma.AnnouncementScalarFieldEnum = {
   createdById: 'createdById'
 };
 
+exports.Prisma.LeaveScalarFieldEnum = {
+  id: 'id',
+  employeeId: 'employeeId',
+  leaveType: 'leaveType',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  duration: 'duration',
+  reason: 'reason',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -196,6 +210,15 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Department = exports.$Enums.Department = {
+  HR: 'HR',
+  IT: 'IT',
+  SALES: 'SALES',
+  MARKETING: 'MARKETING',
+  FINANCE: 'FINANCE',
+  OPERATIONS: 'OPERATIONS'
+};
+
 exports.AnnouncementCategory = exports.$Enums.AnnouncementCategory = {
   holiday: 'holiday',
   update: 'update',
@@ -204,12 +227,29 @@ exports.AnnouncementCategory = exports.$Enums.AnnouncementCategory = {
   policy: 'policy'
 };
 
+exports.LeaveType = exports.$Enums.LeaveType = {
+  ANNUAL_LEAVE: 'ANNUAL_LEAVE',
+  MATERNITY_LEAVE: 'MATERNITY_LEAVE',
+  CASUAL_LEAVE: 'CASUAL_LEAVE',
+  SICK_LEAVE: 'SICK_LEAVE',
+  PERSONAL_LEAVE: 'PERSONAL_LEAVE',
+  UNPAID_LEAVE: 'UNPAID_LEAVE'
+};
+
+exports.LeaveStatus = exports.$Enums.LeaveStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
-  Announcement: 'Announcement'
+  Announcement: 'Announcement',
+  Leave: 'Leave'
 };
 
 /**

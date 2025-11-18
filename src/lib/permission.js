@@ -5,15 +5,18 @@ export const statement = {
   ...defaultStatements,
 
   announcement: ['create', 'read', 'edit', 'delete'],
+  leave: ['create', 'read', 'edit', 'delete'],
 }
 
 export const ac = createAccessControl(statement)
 
 export const employee = ac.newRole({
   announcement: ['read'],
+  leave: ['create', 'read', 'edit', 'delete'],
 })
 
 export const admin = ac.newRole({
   announcement: ['create', 'read', 'edit', 'delete'],
+  leave: ['create', 'read', 'edit', 'delete'],
   ...adminAc.statements,
 })

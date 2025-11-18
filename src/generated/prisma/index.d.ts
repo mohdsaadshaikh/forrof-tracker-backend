@@ -38,6 +38,11 @@ export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
  * 
  */
 export type Announcement = $Result.DefaultSelection<Prisma.$AnnouncementPayload>
+/**
+ * Model Leave
+ * 
+ */
+export type Leave = $Result.DefaultSelection<Prisma.$LeavePayload>
 
 /**
  * Enums
@@ -51,6 +56,18 @@ export namespace $Enums {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
+export const Department: {
+  HR: 'HR',
+  IT: 'IT',
+  SALES: 'SALES',
+  MARKETING: 'MARKETING',
+  FINANCE: 'FINANCE',
+  OPERATIONS: 'OPERATIONS'
+};
+
+export type Department = (typeof Department)[keyof typeof Department]
+
+
 export const AnnouncementCategory: {
   holiday: 'holiday',
   update: 'update',
@@ -61,15 +78,49 @@ export const AnnouncementCategory: {
 
 export type AnnouncementCategory = (typeof AnnouncementCategory)[keyof typeof AnnouncementCategory]
 
+
+export const LeaveType: {
+  ANNUAL_LEAVE: 'ANNUAL_LEAVE',
+  MATERNITY_LEAVE: 'MATERNITY_LEAVE',
+  CASUAL_LEAVE: 'CASUAL_LEAVE',
+  SICK_LEAVE: 'SICK_LEAVE',
+  PERSONAL_LEAVE: 'PERSONAL_LEAVE',
+  UNPAID_LEAVE: 'UNPAID_LEAVE'
+};
+
+export type LeaveType = (typeof LeaveType)[keyof typeof LeaveType]
+
+
+export const LeaveStatus: {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type LeaveStatus = (typeof LeaveStatus)[keyof typeof LeaveStatus]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
 
+export type Department = $Enums.Department
+
+export const Department: typeof $Enums.Department
+
 export type AnnouncementCategory = $Enums.AnnouncementCategory
 
 export const AnnouncementCategory: typeof $Enums.AnnouncementCategory
+
+export type LeaveType = $Enums.LeaveType
+
+export const LeaveType: typeof $Enums.LeaveType
+
+export type LeaveStatus = $Enums.LeaveStatus
+
+export const LeaveStatus: typeof $Enums.LeaveStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -238,6 +289,16 @@ export class PrismaClient<
     * ```
     */
   get announcement(): Prisma.AnnouncementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.leave`: Exposes CRUD operations for the **Leave** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Leaves
+    * const leaves = await prisma.leave.findMany()
+    * ```
+    */
+  get leave(): Prisma.LeaveDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -683,7 +744,8 @@ export namespace Prisma {
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification',
-    Announcement: 'Announcement'
+    Announcement: 'Announcement',
+    Leave: 'Leave'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -702,7 +764,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "announcement"
+      modelProps: "user" | "session" | "account" | "verification" | "announcement" | "leave"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1076,6 +1138,80 @@ export namespace Prisma {
           }
         }
       }
+      Leave: {
+        payload: Prisma.$LeavePayload<ExtArgs>
+        fields: Prisma.LeaveFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LeaveFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LeaveFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload>
+          }
+          findFirst: {
+            args: Prisma.LeaveFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LeaveFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload>
+          }
+          findMany: {
+            args: Prisma.LeaveFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload>[]
+          }
+          create: {
+            args: Prisma.LeaveCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload>
+          }
+          createMany: {
+            args: Prisma.LeaveCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LeaveCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload>[]
+          }
+          delete: {
+            args: Prisma.LeaveDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload>
+          }
+          update: {
+            args: Prisma.LeaveUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload>
+          }
+          deleteMany: {
+            args: Prisma.LeaveDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LeaveUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LeaveUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload>[]
+          }
+          upsert: {
+            args: Prisma.LeaveUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LeavePayload>
+          }
+          aggregate: {
+            args: Prisma.LeaveAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLeave>
+          }
+          groupBy: {
+            args: Prisma.LeaveGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LeaveGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LeaveCountArgs<ExtArgs>
+            result: $Utils.Optional<LeaveCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1177,6 +1313,7 @@ export namespace Prisma {
     account?: AccountOmit
     verification?: VerificationOmit
     announcement?: AnnouncementOmit
+    leave?: LeaveOmit
   }
 
   /* Types for Logging */
@@ -1260,12 +1397,14 @@ export namespace Prisma {
     sessions: number
     accounts: number
     announcements: number
+    leaves: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     announcements?: boolean | UserCountOutputTypeCountAnnouncementsArgs
+    leaves?: boolean | UserCountOutputTypeCountLeavesArgs
   }
 
   // Custom InputTypes
@@ -1300,6 +1439,13 @@ export namespace Prisma {
     where?: AnnouncementWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLeavesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeaveWhereInput
+  }
+
 
   /**
    * Models
@@ -1324,6 +1470,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     role: string | null
+    department: $Enums.Department | null
     banned: boolean | null
     banReason: string | null
     banExpires: Date | null
@@ -1338,6 +1485,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     role: string | null
+    department: $Enums.Department | null
     banned: boolean | null
     banReason: string | null
     banExpires: Date | null
@@ -1352,6 +1500,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     role: number
+    department: number
     banned: number
     banReason: number
     banExpires: number
@@ -1368,6 +1517,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     role?: true
+    department?: true
     banned?: true
     banReason?: true
     banExpires?: true
@@ -1382,6 +1532,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     role?: true
+    department?: true
     banned?: true
     banReason?: true
     banExpires?: true
@@ -1396,6 +1547,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     role?: true
+    department?: true
     banned?: true
     banReason?: true
     banExpires?: true
@@ -1483,6 +1635,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     role: string | null
+    department: $Enums.Department | null
     banned: boolean | null
     banReason: string | null
     banExpires: Date | null
@@ -1514,12 +1667,14 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     role?: boolean
+    department?: boolean
     banned?: boolean
     banReason?: boolean
     banExpires?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     announcements?: boolean | User$announcementsArgs<ExtArgs>
+    leaves?: boolean | User$leavesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1532,6 +1687,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     role?: boolean
+    department?: boolean
     banned?: boolean
     banReason?: boolean
     banExpires?: boolean
@@ -1546,6 +1702,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     role?: boolean
+    department?: boolean
     banned?: boolean
     banReason?: boolean
     banExpires?: boolean
@@ -1560,16 +1717,18 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     role?: boolean
+    department?: boolean
     banned?: boolean
     banReason?: boolean
     banExpires?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "role" | "banned" | "banReason" | "banExpires", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "role" | "department" | "banned" | "banReason" | "banExpires", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     announcements?: boolean | User$announcementsArgs<ExtArgs>
+    leaves?: boolean | User$leavesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1581,6 +1740,7 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       announcements: Prisma.$AnnouncementPayload<ExtArgs>[]
+      leaves: Prisma.$LeavePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1591,6 +1751,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       role: string | null
+      department: $Enums.Department | null
       banned: boolean | null
       banReason: string | null
       banExpires: Date | null
@@ -1991,6 +2152,7 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     announcements<T extends User$announcementsArgs<ExtArgs> = {}>(args?: Subset<T, User$announcementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnnouncementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    leaves<T extends User$leavesArgs<ExtArgs> = {}>(args?: Subset<T, User$leavesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2028,6 +2190,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly role: FieldRef<"User", 'String'>
+    readonly department: FieldRef<"User", 'Department'>
     readonly banned: FieldRef<"User", 'Boolean'>
     readonly banReason: FieldRef<"User", 'String'>
     readonly banExpires: FieldRef<"User", 'DateTime'>
@@ -2488,6 +2651,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AnnouncementScalarFieldEnum | AnnouncementScalarFieldEnum[]
+  }
+
+  /**
+   * User.leaves
+   */
+  export type User$leavesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    where?: LeaveWhereInput
+    orderBy?: LeaveOrderByWithRelationInput | LeaveOrderByWithRelationInput[]
+    cursor?: LeaveWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LeaveScalarFieldEnum | LeaveScalarFieldEnum[]
   }
 
   /**
@@ -6887,6 +7074,1163 @@ export namespace Prisma {
 
 
   /**
+   * Model Leave
+   */
+
+  export type AggregateLeave = {
+    _count: LeaveCountAggregateOutputType | null
+    _avg: LeaveAvgAggregateOutputType | null
+    _sum: LeaveSumAggregateOutputType | null
+    _min: LeaveMinAggregateOutputType | null
+    _max: LeaveMaxAggregateOutputType | null
+  }
+
+  export type LeaveAvgAggregateOutputType = {
+    duration: number | null
+  }
+
+  export type LeaveSumAggregateOutputType = {
+    duration: number | null
+  }
+
+  export type LeaveMinAggregateOutputType = {
+    id: string | null
+    employeeId: string | null
+    leaveType: $Enums.LeaveType | null
+    startDate: Date | null
+    endDate: Date | null
+    duration: number | null
+    reason: string | null
+    status: $Enums.LeaveStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LeaveMaxAggregateOutputType = {
+    id: string | null
+    employeeId: string | null
+    leaveType: $Enums.LeaveType | null
+    startDate: Date | null
+    endDate: Date | null
+    duration: number | null
+    reason: string | null
+    status: $Enums.LeaveStatus | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LeaveCountAggregateOutputType = {
+    id: number
+    employeeId: number
+    leaveType: number
+    startDate: number
+    endDate: number
+    duration: number
+    reason: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type LeaveAvgAggregateInputType = {
+    duration?: true
+  }
+
+  export type LeaveSumAggregateInputType = {
+    duration?: true
+  }
+
+  export type LeaveMinAggregateInputType = {
+    id?: true
+    employeeId?: true
+    leaveType?: true
+    startDate?: true
+    endDate?: true
+    duration?: true
+    reason?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LeaveMaxAggregateInputType = {
+    id?: true
+    employeeId?: true
+    leaveType?: true
+    startDate?: true
+    endDate?: true
+    duration?: true
+    reason?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LeaveCountAggregateInputType = {
+    id?: true
+    employeeId?: true
+    leaveType?: true
+    startDate?: true
+    endDate?: true
+    duration?: true
+    reason?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type LeaveAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Leave to aggregate.
+     */
+    where?: LeaveWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leaves to fetch.
+     */
+    orderBy?: LeaveOrderByWithRelationInput | LeaveOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LeaveWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leaves from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leaves.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Leaves
+    **/
+    _count?: true | LeaveCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LeaveAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LeaveSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LeaveMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LeaveMaxAggregateInputType
+  }
+
+  export type GetLeaveAggregateType<T extends LeaveAggregateArgs> = {
+        [P in keyof T & keyof AggregateLeave]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLeave[P]>
+      : GetScalarType<T[P], AggregateLeave[P]>
+  }
+
+
+
+
+  export type LeaveGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LeaveWhereInput
+    orderBy?: LeaveOrderByWithAggregationInput | LeaveOrderByWithAggregationInput[]
+    by: LeaveScalarFieldEnum[] | LeaveScalarFieldEnum
+    having?: LeaveScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LeaveCountAggregateInputType | true
+    _avg?: LeaveAvgAggregateInputType
+    _sum?: LeaveSumAggregateInputType
+    _min?: LeaveMinAggregateInputType
+    _max?: LeaveMaxAggregateInputType
+  }
+
+  export type LeaveGroupByOutputType = {
+    id: string
+    employeeId: string
+    leaveType: $Enums.LeaveType
+    startDate: Date
+    endDate: Date
+    duration: number
+    reason: string | null
+    status: $Enums.LeaveStatus
+    createdAt: Date
+    updatedAt: Date
+    _count: LeaveCountAggregateOutputType | null
+    _avg: LeaveAvgAggregateOutputType | null
+    _sum: LeaveSumAggregateOutputType | null
+    _min: LeaveMinAggregateOutputType | null
+    _max: LeaveMaxAggregateOutputType | null
+  }
+
+  type GetLeaveGroupByPayload<T extends LeaveGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LeaveGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LeaveGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LeaveGroupByOutputType[P]>
+            : GetScalarType<T[P], LeaveGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LeaveSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    employeeId?: boolean
+    leaveType?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    duration?: boolean
+    reason?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    employee?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["leave"]>
+
+  export type LeaveSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    employeeId?: boolean
+    leaveType?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    duration?: boolean
+    reason?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    employee?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["leave"]>
+
+  export type LeaveSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    employeeId?: boolean
+    leaveType?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    duration?: boolean
+    reason?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    employee?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["leave"]>
+
+  export type LeaveSelectScalar = {
+    id?: boolean
+    employeeId?: boolean
+    leaveType?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    duration?: boolean
+    reason?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type LeaveOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "employeeId" | "leaveType" | "startDate" | "endDate" | "duration" | "reason" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["leave"]>
+  export type LeaveInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    employee?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type LeaveIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    employee?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type LeaveIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    employee?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $LeavePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Leave"
+    objects: {
+      employee: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      employeeId: string
+      leaveType: $Enums.LeaveType
+      startDate: Date
+      endDate: Date
+      duration: number
+      reason: string | null
+      status: $Enums.LeaveStatus
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["leave"]>
+    composites: {}
+  }
+
+  type LeaveGetPayload<S extends boolean | null | undefined | LeaveDefaultArgs> = $Result.GetResult<Prisma.$LeavePayload, S>
+
+  type LeaveCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LeaveFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LeaveCountAggregateInputType | true
+    }
+
+  export interface LeaveDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Leave'], meta: { name: 'Leave' } }
+    /**
+     * Find zero or one Leave that matches the filter.
+     * @param {LeaveFindUniqueArgs} args - Arguments to find a Leave
+     * @example
+     * // Get one Leave
+     * const leave = await prisma.leave.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LeaveFindUniqueArgs>(args: SelectSubset<T, LeaveFindUniqueArgs<ExtArgs>>): Prisma__LeaveClient<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Leave that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LeaveFindUniqueOrThrowArgs} args - Arguments to find a Leave
+     * @example
+     * // Get one Leave
+     * const leave = await prisma.leave.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LeaveFindUniqueOrThrowArgs>(args: SelectSubset<T, LeaveFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LeaveClient<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Leave that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaveFindFirstArgs} args - Arguments to find a Leave
+     * @example
+     * // Get one Leave
+     * const leave = await prisma.leave.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LeaveFindFirstArgs>(args?: SelectSubset<T, LeaveFindFirstArgs<ExtArgs>>): Prisma__LeaveClient<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Leave that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaveFindFirstOrThrowArgs} args - Arguments to find a Leave
+     * @example
+     * // Get one Leave
+     * const leave = await prisma.leave.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LeaveFindFirstOrThrowArgs>(args?: SelectSubset<T, LeaveFindFirstOrThrowArgs<ExtArgs>>): Prisma__LeaveClient<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Leaves that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaveFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Leaves
+     * const leaves = await prisma.leave.findMany()
+     * 
+     * // Get first 10 Leaves
+     * const leaves = await prisma.leave.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const leaveWithIdOnly = await prisma.leave.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LeaveFindManyArgs>(args?: SelectSubset<T, LeaveFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Leave.
+     * @param {LeaveCreateArgs} args - Arguments to create a Leave.
+     * @example
+     * // Create one Leave
+     * const Leave = await prisma.leave.create({
+     *   data: {
+     *     // ... data to create a Leave
+     *   }
+     * })
+     * 
+     */
+    create<T extends LeaveCreateArgs>(args: SelectSubset<T, LeaveCreateArgs<ExtArgs>>): Prisma__LeaveClient<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Leaves.
+     * @param {LeaveCreateManyArgs} args - Arguments to create many Leaves.
+     * @example
+     * // Create many Leaves
+     * const leave = await prisma.leave.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LeaveCreateManyArgs>(args?: SelectSubset<T, LeaveCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Leaves and returns the data saved in the database.
+     * @param {LeaveCreateManyAndReturnArgs} args - Arguments to create many Leaves.
+     * @example
+     * // Create many Leaves
+     * const leave = await prisma.leave.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Leaves and only return the `id`
+     * const leaveWithIdOnly = await prisma.leave.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LeaveCreateManyAndReturnArgs>(args?: SelectSubset<T, LeaveCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Leave.
+     * @param {LeaveDeleteArgs} args - Arguments to delete one Leave.
+     * @example
+     * // Delete one Leave
+     * const Leave = await prisma.leave.delete({
+     *   where: {
+     *     // ... filter to delete one Leave
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LeaveDeleteArgs>(args: SelectSubset<T, LeaveDeleteArgs<ExtArgs>>): Prisma__LeaveClient<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Leave.
+     * @param {LeaveUpdateArgs} args - Arguments to update one Leave.
+     * @example
+     * // Update one Leave
+     * const leave = await prisma.leave.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LeaveUpdateArgs>(args: SelectSubset<T, LeaveUpdateArgs<ExtArgs>>): Prisma__LeaveClient<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Leaves.
+     * @param {LeaveDeleteManyArgs} args - Arguments to filter Leaves to delete.
+     * @example
+     * // Delete a few Leaves
+     * const { count } = await prisma.leave.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LeaveDeleteManyArgs>(args?: SelectSubset<T, LeaveDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Leaves.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaveUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Leaves
+     * const leave = await prisma.leave.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LeaveUpdateManyArgs>(args: SelectSubset<T, LeaveUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Leaves and returns the data updated in the database.
+     * @param {LeaveUpdateManyAndReturnArgs} args - Arguments to update many Leaves.
+     * @example
+     * // Update many Leaves
+     * const leave = await prisma.leave.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Leaves and only return the `id`
+     * const leaveWithIdOnly = await prisma.leave.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LeaveUpdateManyAndReturnArgs>(args: SelectSubset<T, LeaveUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Leave.
+     * @param {LeaveUpsertArgs} args - Arguments to update or create a Leave.
+     * @example
+     * // Update or create a Leave
+     * const leave = await prisma.leave.upsert({
+     *   create: {
+     *     // ... data to create a Leave
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Leave we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LeaveUpsertArgs>(args: SelectSubset<T, LeaveUpsertArgs<ExtArgs>>): Prisma__LeaveClient<$Result.GetResult<Prisma.$LeavePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Leaves.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaveCountArgs} args - Arguments to filter Leaves to count.
+     * @example
+     * // Count the number of Leaves
+     * const count = await prisma.leave.count({
+     *   where: {
+     *     // ... the filter for the Leaves we want to count
+     *   }
+     * })
+    **/
+    count<T extends LeaveCountArgs>(
+      args?: Subset<T, LeaveCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LeaveCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Leave.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaveAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LeaveAggregateArgs>(args: Subset<T, LeaveAggregateArgs>): Prisma.PrismaPromise<GetLeaveAggregateType<T>>
+
+    /**
+     * Group by Leave.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LeaveGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LeaveGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LeaveGroupByArgs['orderBy'] }
+        : { orderBy?: LeaveGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LeaveGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLeaveGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Leave model
+   */
+  readonly fields: LeaveFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Leave.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LeaveClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    employee<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Leave model
+   */
+  interface LeaveFieldRefs {
+    readonly id: FieldRef<"Leave", 'String'>
+    readonly employeeId: FieldRef<"Leave", 'String'>
+    readonly leaveType: FieldRef<"Leave", 'LeaveType'>
+    readonly startDate: FieldRef<"Leave", 'DateTime'>
+    readonly endDate: FieldRef<"Leave", 'DateTime'>
+    readonly duration: FieldRef<"Leave", 'Int'>
+    readonly reason: FieldRef<"Leave", 'String'>
+    readonly status: FieldRef<"Leave", 'LeaveStatus'>
+    readonly createdAt: FieldRef<"Leave", 'DateTime'>
+    readonly updatedAt: FieldRef<"Leave", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Leave findUnique
+   */
+  export type LeaveFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    /**
+     * Filter, which Leave to fetch.
+     */
+    where: LeaveWhereUniqueInput
+  }
+
+  /**
+   * Leave findUniqueOrThrow
+   */
+  export type LeaveFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    /**
+     * Filter, which Leave to fetch.
+     */
+    where: LeaveWhereUniqueInput
+  }
+
+  /**
+   * Leave findFirst
+   */
+  export type LeaveFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    /**
+     * Filter, which Leave to fetch.
+     */
+    where?: LeaveWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leaves to fetch.
+     */
+    orderBy?: LeaveOrderByWithRelationInput | LeaveOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Leaves.
+     */
+    cursor?: LeaveWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leaves from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leaves.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Leaves.
+     */
+    distinct?: LeaveScalarFieldEnum | LeaveScalarFieldEnum[]
+  }
+
+  /**
+   * Leave findFirstOrThrow
+   */
+  export type LeaveFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    /**
+     * Filter, which Leave to fetch.
+     */
+    where?: LeaveWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leaves to fetch.
+     */
+    orderBy?: LeaveOrderByWithRelationInput | LeaveOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Leaves.
+     */
+    cursor?: LeaveWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leaves from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leaves.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Leaves.
+     */
+    distinct?: LeaveScalarFieldEnum | LeaveScalarFieldEnum[]
+  }
+
+  /**
+   * Leave findMany
+   */
+  export type LeaveFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    /**
+     * Filter, which Leaves to fetch.
+     */
+    where?: LeaveWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Leaves to fetch.
+     */
+    orderBy?: LeaveOrderByWithRelationInput | LeaveOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Leaves.
+     */
+    cursor?: LeaveWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Leaves from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Leaves.
+     */
+    skip?: number
+    distinct?: LeaveScalarFieldEnum | LeaveScalarFieldEnum[]
+  }
+
+  /**
+   * Leave create
+   */
+  export type LeaveCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Leave.
+     */
+    data: XOR<LeaveCreateInput, LeaveUncheckedCreateInput>
+  }
+
+  /**
+   * Leave createMany
+   */
+  export type LeaveCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Leaves.
+     */
+    data: LeaveCreateManyInput | LeaveCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Leave createManyAndReturn
+   */
+  export type LeaveCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * The data used to create many Leaves.
+     */
+    data: LeaveCreateManyInput | LeaveCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Leave update
+   */
+  export type LeaveUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Leave.
+     */
+    data: XOR<LeaveUpdateInput, LeaveUncheckedUpdateInput>
+    /**
+     * Choose, which Leave to update.
+     */
+    where: LeaveWhereUniqueInput
+  }
+
+  /**
+   * Leave updateMany
+   */
+  export type LeaveUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Leaves.
+     */
+    data: XOR<LeaveUpdateManyMutationInput, LeaveUncheckedUpdateManyInput>
+    /**
+     * Filter which Leaves to update
+     */
+    where?: LeaveWhereInput
+    /**
+     * Limit how many Leaves to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Leave updateManyAndReturn
+   */
+  export type LeaveUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * The data used to update Leaves.
+     */
+    data: XOR<LeaveUpdateManyMutationInput, LeaveUncheckedUpdateManyInput>
+    /**
+     * Filter which Leaves to update
+     */
+    where?: LeaveWhereInput
+    /**
+     * Limit how many Leaves to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Leave upsert
+   */
+  export type LeaveUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Leave to update in case it exists.
+     */
+    where: LeaveWhereUniqueInput
+    /**
+     * In case the Leave found by the `where` argument doesn't exist, create a new Leave with this data.
+     */
+    create: XOR<LeaveCreateInput, LeaveUncheckedCreateInput>
+    /**
+     * In case the Leave was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LeaveUpdateInput, LeaveUncheckedUpdateInput>
+  }
+
+  /**
+   * Leave delete
+   */
+  export type LeaveDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+    /**
+     * Filter which Leave to delete.
+     */
+    where: LeaveWhereUniqueInput
+  }
+
+  /**
+   * Leave deleteMany
+   */
+  export type LeaveDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Leaves to delete
+     */
+    where?: LeaveWhereInput
+    /**
+     * Limit how many Leaves to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Leave without action
+   */
+  export type LeaveDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Leave
+     */
+    select?: LeaveSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Leave
+     */
+    omit?: LeaveOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LeaveInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6909,6 +8253,7 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     role: 'role',
+    department: 'department',
     banned: 'banned',
     banReason: 'banReason',
     banExpires: 'banExpires'
@@ -6977,6 +8322,22 @@ export namespace Prisma {
   export type AnnouncementScalarFieldEnum = (typeof AnnouncementScalarFieldEnum)[keyof typeof AnnouncementScalarFieldEnum]
 
 
+  export const LeaveScalarFieldEnum: {
+    id: 'id',
+    employeeId: 'employeeId',
+    leaveType: 'leaveType',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    duration: 'duration',
+    reason: 'reason',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type LeaveScalarFieldEnum = (typeof LeaveScalarFieldEnum)[keyof typeof LeaveScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -7042,6 +8403,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Department'
+   */
+  export type EnumDepartmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Department'>
+    
+
+
+  /**
+   * Reference to a field of type 'Department[]'
+   */
+  export type ListEnumDepartmentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Department[]'>
+    
+
+
+  /**
    * Reference to a field of type 'AnnouncementCategory'
    */
   export type EnumAnnouncementCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AnnouncementCategory'>
@@ -7056,6 +8431,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'LeaveType'
+   */
+  export type EnumLeaveTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeaveType'>
+    
+
+
+  /**
+   * Reference to a field of type 'LeaveType[]'
+   */
+  export type ListEnumLeaveTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeaveType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -7066,6 +8455,34 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'LeaveStatus'
+   */
+  export type EnumLeaveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeaveStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'LeaveStatus[]'
+   */
+  export type ListEnumLeaveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeaveStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -7084,12 +8501,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     role?: StringNullableFilter<"User"> | string | null
+    department?: EnumDepartmentNullableFilter<"User"> | $Enums.Department | null
     banned?: BoolNullableFilter<"User"> | boolean | null
     banReason?: StringNullableFilter<"User"> | string | null
     banExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     announcements?: AnnouncementListRelationFilter
+    leaves?: LeaveListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7101,12 +8520,14 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     role?: SortOrderInput | SortOrder
+    department?: SortOrderInput | SortOrder
     banned?: SortOrderInput | SortOrder
     banReason?: SortOrderInput | SortOrder
     banExpires?: SortOrderInput | SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     announcements?: AnnouncementOrderByRelationAggregateInput
+    leaves?: LeaveOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7121,12 +8542,14 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     role?: StringNullableFilter<"User"> | string | null
+    department?: EnumDepartmentNullableFilter<"User"> | $Enums.Department | null
     banned?: BoolNullableFilter<"User"> | boolean | null
     banReason?: StringNullableFilter<"User"> | string | null
     banExpires?: DateTimeNullableFilter<"User"> | Date | string | null
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
     announcements?: AnnouncementListRelationFilter
+    leaves?: LeaveListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -7138,6 +8561,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     role?: SortOrderInput | SortOrder
+    department?: SortOrderInput | SortOrder
     banned?: SortOrderInput | SortOrder
     banReason?: SortOrderInput | SortOrder
     banExpires?: SortOrderInput | SortOrder
@@ -7158,6 +8582,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     role?: StringNullableWithAggregatesFilter<"User"> | string | null
+    department?: EnumDepartmentNullableWithAggregatesFilter<"User"> | $Enums.Department | null
     banned?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     banReason?: StringNullableWithAggregatesFilter<"User"> | string | null
     banExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -7460,6 +8885,88 @@ export namespace Prisma {
     createdById?: StringWithAggregatesFilter<"Announcement"> | string
   }
 
+  export type LeaveWhereInput = {
+    AND?: LeaveWhereInput | LeaveWhereInput[]
+    OR?: LeaveWhereInput[]
+    NOT?: LeaveWhereInput | LeaveWhereInput[]
+    id?: StringFilter<"Leave"> | string
+    employeeId?: StringFilter<"Leave"> | string
+    leaveType?: EnumLeaveTypeFilter<"Leave"> | $Enums.LeaveType
+    startDate?: DateTimeFilter<"Leave"> | Date | string
+    endDate?: DateTimeFilter<"Leave"> | Date | string
+    duration?: IntFilter<"Leave"> | number
+    reason?: StringNullableFilter<"Leave"> | string | null
+    status?: EnumLeaveStatusFilter<"Leave"> | $Enums.LeaveStatus
+    createdAt?: DateTimeFilter<"Leave"> | Date | string
+    updatedAt?: DateTimeFilter<"Leave"> | Date | string
+    employee?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type LeaveOrderByWithRelationInput = {
+    id?: SortOrder
+    employeeId?: SortOrder
+    leaveType?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    duration?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    employee?: UserOrderByWithRelationInput
+  }
+
+  export type LeaveWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LeaveWhereInput | LeaveWhereInput[]
+    OR?: LeaveWhereInput[]
+    NOT?: LeaveWhereInput | LeaveWhereInput[]
+    employeeId?: StringFilter<"Leave"> | string
+    leaveType?: EnumLeaveTypeFilter<"Leave"> | $Enums.LeaveType
+    startDate?: DateTimeFilter<"Leave"> | Date | string
+    endDate?: DateTimeFilter<"Leave"> | Date | string
+    duration?: IntFilter<"Leave"> | number
+    reason?: StringNullableFilter<"Leave"> | string | null
+    status?: EnumLeaveStatusFilter<"Leave"> | $Enums.LeaveStatus
+    createdAt?: DateTimeFilter<"Leave"> | Date | string
+    updatedAt?: DateTimeFilter<"Leave"> | Date | string
+    employee?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type LeaveOrderByWithAggregationInput = {
+    id?: SortOrder
+    employeeId?: SortOrder
+    leaveType?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    duration?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: LeaveCountOrderByAggregateInput
+    _avg?: LeaveAvgOrderByAggregateInput
+    _max?: LeaveMaxOrderByAggregateInput
+    _min?: LeaveMinOrderByAggregateInput
+    _sum?: LeaveSumOrderByAggregateInput
+  }
+
+  export type LeaveScalarWhereWithAggregatesInput = {
+    AND?: LeaveScalarWhereWithAggregatesInput | LeaveScalarWhereWithAggregatesInput[]
+    OR?: LeaveScalarWhereWithAggregatesInput[]
+    NOT?: LeaveScalarWhereWithAggregatesInput | LeaveScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Leave"> | string
+    employeeId?: StringWithAggregatesFilter<"Leave"> | string
+    leaveType?: EnumLeaveTypeWithAggregatesFilter<"Leave"> | $Enums.LeaveType
+    startDate?: DateTimeWithAggregatesFilter<"Leave"> | Date | string
+    endDate?: DateTimeWithAggregatesFilter<"Leave"> | Date | string
+    duration?: IntWithAggregatesFilter<"Leave"> | number
+    reason?: StringNullableWithAggregatesFilter<"Leave"> | string | null
+    status?: EnumLeaveStatusWithAggregatesFilter<"Leave"> | $Enums.LeaveStatus
+    createdAt?: DateTimeWithAggregatesFilter<"Leave"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Leave"> | Date | string
+  }
+
   export type UserCreateInput = {
     id: string
     name: string
@@ -7469,12 +8976,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: string | null
+    department?: $Enums.Department | null
     banned?: boolean | null
     banReason?: string | null
     banExpires?: Date | string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     announcements?: AnnouncementCreateNestedManyWithoutCreatedByInput
+    leaves?: LeaveCreateNestedManyWithoutEmployeeInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7486,12 +8995,14 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: string | null
+    department?: $Enums.Department | null
     banned?: boolean | null
     banReason?: string | null
     banExpires?: Date | string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     announcements?: AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+    leaves?: LeaveUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type UserUpdateInput = {
@@ -7503,12 +9014,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     announcements?: AnnouncementUpdateManyWithoutCreatedByNestedInput
+    leaves?: LeaveUpdateManyWithoutEmployeeNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7520,12 +9033,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     announcements?: AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+    leaves?: LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7537,6 +9052,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: string | null
+    department?: $Enums.Department | null
     banned?: boolean | null
     banReason?: string | null
     banExpires?: Date | string | null
@@ -7551,6 +9067,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7565,6 +9082,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7903,6 +9421,96 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
   }
 
+  export type LeaveCreateInput = {
+    id?: string
+    leaveType: $Enums.LeaveType
+    startDate: Date | string
+    endDate: Date | string
+    duration: number
+    reason?: string | null
+    status?: $Enums.LeaveStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    employee: UserCreateNestedOneWithoutLeavesInput
+  }
+
+  export type LeaveUncheckedCreateInput = {
+    id?: string
+    employeeId: string
+    leaveType: $Enums.LeaveType
+    startDate: Date | string
+    endDate: Date | string
+    duration: number
+    reason?: string | null
+    status?: $Enums.LeaveStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LeaveUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leaveType?: EnumLeaveTypeFieldUpdateOperationsInput | $Enums.LeaveType
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLeaveStatusFieldUpdateOperationsInput | $Enums.LeaveStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    employee?: UserUpdateOneRequiredWithoutLeavesNestedInput
+  }
+
+  export type LeaveUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeId?: StringFieldUpdateOperationsInput | string
+    leaveType?: EnumLeaveTypeFieldUpdateOperationsInput | $Enums.LeaveType
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLeaveStatusFieldUpdateOperationsInput | $Enums.LeaveStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaveCreateManyInput = {
+    id?: string
+    employeeId: string
+    leaveType: $Enums.LeaveType
+    startDate: Date | string
+    endDate: Date | string
+    duration: number
+    reason?: string | null
+    status?: $Enums.LeaveStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LeaveUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leaveType?: EnumLeaveTypeFieldUpdateOperationsInput | $Enums.LeaveType
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLeaveStatusFieldUpdateOperationsInput | $Enums.LeaveStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaveUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    employeeId?: StringFieldUpdateOperationsInput | string
+    leaveType?: EnumLeaveTypeFieldUpdateOperationsInput | $Enums.LeaveType
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLeaveStatusFieldUpdateOperationsInput | $Enums.LeaveStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7949,6 +9557,13 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type EnumDepartmentNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Department[] | ListEnumDepartmentFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Department[] | ListEnumDepartmentFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumDepartmentNullableFilter<$PrismaModel> | $Enums.Department | null
+  }
+
   export type BoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
@@ -7983,6 +9598,12 @@ export namespace Prisma {
     none?: AnnouncementWhereInput
   }
 
+  export type LeaveListRelationFilter = {
+    every?: LeaveWhereInput
+    some?: LeaveWhereInput
+    none?: LeaveWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -8000,6 +9621,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type LeaveOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -8009,6 +9634,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     role?: SortOrder
+    department?: SortOrder
     banned?: SortOrder
     banReason?: SortOrder
     banExpires?: SortOrder
@@ -8023,6 +9649,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     role?: SortOrder
+    department?: SortOrder
     banned?: SortOrder
     banReason?: SortOrder
     banExpires?: SortOrder
@@ -8037,6 +9664,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     role?: SortOrder
+    department?: SortOrder
     banned?: SortOrder
     banReason?: SortOrder
     banExpires?: SortOrder
@@ -8098,6 +9726,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type EnumDepartmentNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Department[] | ListEnumDepartmentFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Department[] | ListEnumDepartmentFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumDepartmentNullableWithAggregatesFilter<$PrismaModel> | $Enums.Department | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumDepartmentNullableFilter<$PrismaModel>
+    _max?: NestedEnumDepartmentNullableFilter<$PrismaModel>
   }
 
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8288,6 +9926,114 @@ export namespace Prisma {
     _max?: NestedEnumAnnouncementCategoryFilter<$PrismaModel>
   }
 
+  export type EnumLeaveTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeaveType | EnumLeaveTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.LeaveType[] | ListEnumLeaveTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeaveType[] | ListEnumLeaveTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeaveTypeFilter<$PrismaModel> | $Enums.LeaveType
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type EnumLeaveStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeaveStatus | EnumLeaveStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LeaveStatus[] | ListEnumLeaveStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeaveStatus[] | ListEnumLeaveStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeaveStatusFilter<$PrismaModel> | $Enums.LeaveStatus
+  }
+
+  export type LeaveCountOrderByAggregateInput = {
+    id?: SortOrder
+    employeeId?: SortOrder
+    leaveType?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    duration?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LeaveAvgOrderByAggregateInput = {
+    duration?: SortOrder
+  }
+
+  export type LeaveMaxOrderByAggregateInput = {
+    id?: SortOrder
+    employeeId?: SortOrder
+    leaveType?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    duration?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LeaveMinOrderByAggregateInput = {
+    id?: SortOrder
+    employeeId?: SortOrder
+    leaveType?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    duration?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LeaveSumOrderByAggregateInput = {
+    duration?: SortOrder
+  }
+
+  export type EnumLeaveTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeaveType | EnumLeaveTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.LeaveType[] | ListEnumLeaveTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeaveType[] | ListEnumLeaveTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeaveTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeaveType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLeaveTypeFilter<$PrismaModel>
+    _max?: NestedEnumLeaveTypeFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumLeaveStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeaveStatus | EnumLeaveStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LeaveStatus[] | ListEnumLeaveStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeaveStatus[] | ListEnumLeaveStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeaveStatusWithAggregatesFilter<$PrismaModel> | $Enums.LeaveStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLeaveStatusFilter<$PrismaModel>
+    _max?: NestedEnumLeaveStatusFilter<$PrismaModel>
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -8307,6 +10053,13 @@ export namespace Prisma {
     connectOrCreate?: AnnouncementCreateOrConnectWithoutCreatedByInput | AnnouncementCreateOrConnectWithoutCreatedByInput[]
     createMany?: AnnouncementCreateManyCreatedByInputEnvelope
     connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
+  }
+
+  export type LeaveCreateNestedManyWithoutEmployeeInput = {
+    create?: XOR<LeaveCreateWithoutEmployeeInput, LeaveUncheckedCreateWithoutEmployeeInput> | LeaveCreateWithoutEmployeeInput[] | LeaveUncheckedCreateWithoutEmployeeInput[]
+    connectOrCreate?: LeaveCreateOrConnectWithoutEmployeeInput | LeaveCreateOrConnectWithoutEmployeeInput[]
+    createMany?: LeaveCreateManyEmployeeInputEnvelope
+    connect?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
   }
 
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -8330,6 +10083,13 @@ export namespace Prisma {
     connect?: AnnouncementWhereUniqueInput | AnnouncementWhereUniqueInput[]
   }
 
+  export type LeaveUncheckedCreateNestedManyWithoutEmployeeInput = {
+    create?: XOR<LeaveCreateWithoutEmployeeInput, LeaveUncheckedCreateWithoutEmployeeInput> | LeaveCreateWithoutEmployeeInput[] | LeaveUncheckedCreateWithoutEmployeeInput[]
+    connectOrCreate?: LeaveCreateOrConnectWithoutEmployeeInput | LeaveCreateOrConnectWithoutEmployeeInput[]
+    createMany?: LeaveCreateManyEmployeeInputEnvelope
+    connect?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -8344,6 +10104,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableEnumDepartmentFieldUpdateOperationsInput = {
+    set?: $Enums.Department | null
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -8396,6 +10160,20 @@ export namespace Prisma {
     deleteMany?: AnnouncementScalarWhereInput | AnnouncementScalarWhereInput[]
   }
 
+  export type LeaveUpdateManyWithoutEmployeeNestedInput = {
+    create?: XOR<LeaveCreateWithoutEmployeeInput, LeaveUncheckedCreateWithoutEmployeeInput> | LeaveCreateWithoutEmployeeInput[] | LeaveUncheckedCreateWithoutEmployeeInput[]
+    connectOrCreate?: LeaveCreateOrConnectWithoutEmployeeInput | LeaveCreateOrConnectWithoutEmployeeInput[]
+    upsert?: LeaveUpsertWithWhereUniqueWithoutEmployeeInput | LeaveUpsertWithWhereUniqueWithoutEmployeeInput[]
+    createMany?: LeaveCreateManyEmployeeInputEnvelope
+    set?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
+    disconnect?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
+    delete?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
+    connect?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
+    update?: LeaveUpdateWithWhereUniqueWithoutEmployeeInput | LeaveUpdateWithWhereUniqueWithoutEmployeeInput[]
+    updateMany?: LeaveUpdateManyWithWhereWithoutEmployeeInput | LeaveUpdateManyWithWhereWithoutEmployeeInput[]
+    deleteMany?: LeaveScalarWhereInput | LeaveScalarWhereInput[]
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -8436,6 +10214,20 @@ export namespace Prisma {
     update?: AnnouncementUpdateWithWhereUniqueWithoutCreatedByInput | AnnouncementUpdateWithWhereUniqueWithoutCreatedByInput[]
     updateMany?: AnnouncementUpdateManyWithWhereWithoutCreatedByInput | AnnouncementUpdateManyWithWhereWithoutCreatedByInput[]
     deleteMany?: AnnouncementScalarWhereInput | AnnouncementScalarWhereInput[]
+  }
+
+  export type LeaveUncheckedUpdateManyWithoutEmployeeNestedInput = {
+    create?: XOR<LeaveCreateWithoutEmployeeInput, LeaveUncheckedCreateWithoutEmployeeInput> | LeaveCreateWithoutEmployeeInput[] | LeaveUncheckedCreateWithoutEmployeeInput[]
+    connectOrCreate?: LeaveCreateOrConnectWithoutEmployeeInput | LeaveCreateOrConnectWithoutEmployeeInput[]
+    upsert?: LeaveUpsertWithWhereUniqueWithoutEmployeeInput | LeaveUpsertWithWhereUniqueWithoutEmployeeInput[]
+    createMany?: LeaveCreateManyEmployeeInputEnvelope
+    set?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
+    disconnect?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
+    delete?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
+    connect?: LeaveWhereUniqueInput | LeaveWhereUniqueInput[]
+    update?: LeaveUpdateWithWhereUniqueWithoutEmployeeInput | LeaveUpdateWithWhereUniqueWithoutEmployeeInput[]
+    updateMany?: LeaveUpdateManyWithWhereWithoutEmployeeInput | LeaveUpdateManyWithWhereWithoutEmployeeInput[]
+    deleteMany?: LeaveScalarWhereInput | LeaveScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -8484,6 +10276,36 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAnnouncementsInput, UserUpdateWithoutAnnouncementsInput>, UserUncheckedUpdateWithoutAnnouncementsInput>
   }
 
+  export type UserCreateNestedOneWithoutLeavesInput = {
+    create?: XOR<UserCreateWithoutLeavesInput, UserUncheckedCreateWithoutLeavesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLeavesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumLeaveTypeFieldUpdateOperationsInput = {
+    set?: $Enums.LeaveType
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EnumLeaveStatusFieldUpdateOperationsInput = {
+    set?: $Enums.LeaveStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutLeavesNestedInput = {
+    create?: XOR<UserCreateWithoutLeavesInput, UserUncheckedCreateWithoutLeavesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLeavesInput
+    upsert?: UserUpsertWithoutLeavesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLeavesInput, UserUpdateWithoutLeavesInput>, UserUncheckedUpdateWithoutLeavesInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8526,6 +10348,13 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedEnumDepartmentNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Department[] | ListEnumDepartmentFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Department[] | ListEnumDepartmentFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumDepartmentNullableFilter<$PrismaModel> | $Enums.Department | null
   }
 
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
@@ -8622,6 +10451,16 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumDepartmentNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Department[] | ListEnumDepartmentFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Department[] | ListEnumDepartmentFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumDepartmentNullableWithAggregatesFilter<$PrismaModel> | $Enums.Department | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumDepartmentNullableFilter<$PrismaModel>
+    _max?: NestedEnumDepartmentNullableFilter<$PrismaModel>
+  }
+
   export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
@@ -8659,6 +10498,67 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumAnnouncementCategoryFilter<$PrismaModel>
     _max?: NestedEnumAnnouncementCategoryFilter<$PrismaModel>
+  }
+
+  export type NestedEnumLeaveTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeaveType | EnumLeaveTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.LeaveType[] | ListEnumLeaveTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeaveType[] | ListEnumLeaveTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeaveTypeFilter<$PrismaModel> | $Enums.LeaveType
+  }
+
+  export type NestedEnumLeaveStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeaveStatus | EnumLeaveStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LeaveStatus[] | ListEnumLeaveStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeaveStatus[] | ListEnumLeaveStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeaveStatusFilter<$PrismaModel> | $Enums.LeaveStatus
+  }
+
+  export type NestedEnumLeaveTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeaveType | EnumLeaveTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.LeaveType[] | ListEnumLeaveTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeaveType[] | ListEnumLeaveTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeaveTypeWithAggregatesFilter<$PrismaModel> | $Enums.LeaveType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLeaveTypeFilter<$PrismaModel>
+    _max?: NestedEnumLeaveTypeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumLeaveStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LeaveStatus | EnumLeaveStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LeaveStatus[] | ListEnumLeaveStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LeaveStatus[] | ListEnumLeaveStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLeaveStatusWithAggregatesFilter<$PrismaModel> | $Enums.LeaveStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLeaveStatusFilter<$PrismaModel>
+    _max?: NestedEnumLeaveStatusFilter<$PrismaModel>
   }
 
   export type SessionCreateWithoutUserInput = {
@@ -8763,6 +10663,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LeaveCreateWithoutEmployeeInput = {
+    id?: string
+    leaveType: $Enums.LeaveType
+    startDate: Date | string
+    endDate: Date | string
+    duration: number
+    reason?: string | null
+    status?: $Enums.LeaveStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LeaveUncheckedCreateWithoutEmployeeInput = {
+    id?: string
+    leaveType: $Enums.LeaveType
+    startDate: Date | string
+    endDate: Date | string
+    duration: number
+    reason?: string | null
+    status?: $Enums.LeaveStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LeaveCreateOrConnectWithoutEmployeeInput = {
+    where: LeaveWhereUniqueInput
+    create: XOR<LeaveCreateWithoutEmployeeInput, LeaveUncheckedCreateWithoutEmployeeInput>
+  }
+
+  export type LeaveCreateManyEmployeeInputEnvelope = {
+    data: LeaveCreateManyEmployeeInput | LeaveCreateManyEmployeeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -8859,6 +10793,38 @@ export namespace Prisma {
     createdById?: StringFilter<"Announcement"> | string
   }
 
+  export type LeaveUpsertWithWhereUniqueWithoutEmployeeInput = {
+    where: LeaveWhereUniqueInput
+    update: XOR<LeaveUpdateWithoutEmployeeInput, LeaveUncheckedUpdateWithoutEmployeeInput>
+    create: XOR<LeaveCreateWithoutEmployeeInput, LeaveUncheckedCreateWithoutEmployeeInput>
+  }
+
+  export type LeaveUpdateWithWhereUniqueWithoutEmployeeInput = {
+    where: LeaveWhereUniqueInput
+    data: XOR<LeaveUpdateWithoutEmployeeInput, LeaveUncheckedUpdateWithoutEmployeeInput>
+  }
+
+  export type LeaveUpdateManyWithWhereWithoutEmployeeInput = {
+    where: LeaveScalarWhereInput
+    data: XOR<LeaveUpdateManyMutationInput, LeaveUncheckedUpdateManyWithoutEmployeeInput>
+  }
+
+  export type LeaveScalarWhereInput = {
+    AND?: LeaveScalarWhereInput | LeaveScalarWhereInput[]
+    OR?: LeaveScalarWhereInput[]
+    NOT?: LeaveScalarWhereInput | LeaveScalarWhereInput[]
+    id?: StringFilter<"Leave"> | string
+    employeeId?: StringFilter<"Leave"> | string
+    leaveType?: EnumLeaveTypeFilter<"Leave"> | $Enums.LeaveType
+    startDate?: DateTimeFilter<"Leave"> | Date | string
+    endDate?: DateTimeFilter<"Leave"> | Date | string
+    duration?: IntFilter<"Leave"> | number
+    reason?: StringNullableFilter<"Leave"> | string | null
+    status?: EnumLeaveStatusFilter<"Leave"> | $Enums.LeaveStatus
+    createdAt?: DateTimeFilter<"Leave"> | Date | string
+    updatedAt?: DateTimeFilter<"Leave"> | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id: string
     name: string
@@ -8868,11 +10834,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: string | null
+    department?: $Enums.Department | null
     banned?: boolean | null
     banReason?: string | null
     banExpires?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     announcements?: AnnouncementCreateNestedManyWithoutCreatedByInput
+    leaves?: LeaveCreateNestedManyWithoutEmployeeInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -8884,11 +10852,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: string | null
+    department?: $Enums.Department | null
     banned?: boolean | null
     banReason?: string | null
     banExpires?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     announcements?: AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+    leaves?: LeaveUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -8916,11 +10886,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     announcements?: AnnouncementUpdateManyWithoutCreatedByNestedInput
+    leaves?: LeaveUpdateManyWithoutEmployeeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -8932,11 +10904,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     announcements?: AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+    leaves?: LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -8948,11 +10922,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: string | null
+    department?: $Enums.Department | null
     banned?: boolean | null
     banReason?: string | null
     banExpires?: Date | string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     announcements?: AnnouncementCreateNestedManyWithoutCreatedByInput
+    leaves?: LeaveCreateNestedManyWithoutEmployeeInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -8964,11 +10940,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: string | null
+    department?: $Enums.Department | null
     banned?: boolean | null
     banReason?: string | null
     banExpires?: Date | string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     announcements?: AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+    leaves?: LeaveUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -8996,11 +10974,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     announcements?: AnnouncementUpdateManyWithoutCreatedByNestedInput
+    leaves?: LeaveUpdateManyWithoutEmployeeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -9012,11 +10992,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     announcements?: AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
+    leaves?: LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type UserCreateWithoutAnnouncementsInput = {
@@ -9028,11 +11010,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: string | null
+    department?: $Enums.Department | null
     banned?: boolean | null
     banReason?: string | null
     banExpires?: Date | string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    leaves?: LeaveCreateNestedManyWithoutEmployeeInput
   }
 
   export type UserUncheckedCreateWithoutAnnouncementsInput = {
@@ -9044,11 +11028,13 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: string | null
+    department?: $Enums.Department | null
     banned?: boolean | null
     banReason?: string | null
     banExpires?: Date | string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    leaves?: LeaveUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type UserCreateOrConnectWithoutAnnouncementsInput = {
@@ -9076,11 +11062,13 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    leaves?: LeaveUpdateManyWithoutEmployeeNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAnnouncementsInput = {
@@ -9092,11 +11080,101 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
     banReason?: NullableStringFieldUpdateOperationsInput | string | null
     banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    leaves?: LeaveUncheckedUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type UserCreateWithoutLeavesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role?: string | null
+    department?: $Enums.Department | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutLeavesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    role?: string | null
+    department?: $Enums.Department | null
+    banned?: boolean | null
+    banReason?: string | null
+    banExpires?: Date | string | null
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    announcements?: AnnouncementUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutLeavesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLeavesInput, UserUncheckedCreateWithoutLeavesInput>
+  }
+
+  export type UserUpsertWithoutLeavesInput = {
+    update: XOR<UserUpdateWithoutLeavesInput, UserUncheckedUpdateWithoutLeavesInput>
+    create: XOR<UserCreateWithoutLeavesInput, UserUncheckedCreateWithoutLeavesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutLeavesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutLeavesInput, UserUncheckedUpdateWithoutLeavesInput>
+  }
+
+  export type UserUpdateWithoutLeavesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLeavesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
+    banned?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    banReason?: NullableStringFieldUpdateOperationsInput | string | null
+    banExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    announcements?: AnnouncementUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type SessionCreateManyUserInput = {
@@ -9131,6 +11209,18 @@ export namespace Prisma {
     description: string
     category: $Enums.AnnouncementCategory
     department?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LeaveCreateManyEmployeeInput = {
+    id?: string
+    leaveType: $Enums.LeaveType
+    startDate: Date | string
+    endDate: Date | string
+    duration: number
+    reason?: string | null
+    status?: $Enums.LeaveStatus
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9239,6 +11329,42 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     category?: EnumAnnouncementCategoryFieldUpdateOperationsInput | $Enums.AnnouncementCategory
     department?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaveUpdateWithoutEmployeeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leaveType?: EnumLeaveTypeFieldUpdateOperationsInput | $Enums.LeaveType
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLeaveStatusFieldUpdateOperationsInput | $Enums.LeaveStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaveUncheckedUpdateWithoutEmployeeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leaveType?: EnumLeaveTypeFieldUpdateOperationsInput | $Enums.LeaveType
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLeaveStatusFieldUpdateOperationsInput | $Enums.LeaveStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LeaveUncheckedUpdateManyWithoutEmployeeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    leaveType?: EnumLeaveTypeFieldUpdateOperationsInput | $Enums.LeaveType
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    duration?: IntFieldUpdateOperationsInput | number
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLeaveStatusFieldUpdateOperationsInput | $Enums.LeaveStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

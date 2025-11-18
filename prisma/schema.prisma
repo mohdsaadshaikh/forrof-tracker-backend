@@ -26,8 +26,11 @@ model User {
   sessions      Session[]
   accounts      Account[]
   announcements Announcement[]
+  leaves        Leave[]
 
   role       String?
+  department Department?
+
   banned     Boolean?  @default(false)
   banReason  String?
   banExpires DateTime?
@@ -106,10 +109,54 @@ enum Role {
   EMPLOYEE
 }
 
+enum Department {
+  HR
+  IT
+  SALES
+  MARKETING
+  FINANCE
+  OPERATIONS
+}
+
 enum AnnouncementCategory {
   holiday
   update
   urgent
   birthday
   policy
+}
+
+enum LeaveType {
+  ANNUAL_LEAVE
+  MATERNITY_LEAVE
+  CASUAL_LEAVE
+  SICK_LEAVE
+  PERSONAL_LEAVE
+  UNPAID_LEAVE
+}
+
+enum LeaveStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+model Leave {
+  id         String @id @default(uuid())
+  employeeId String
+  employee   User   @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  leaveType LeaveType
+  startDate DateTime
+  endDate   DateTime
+  duration  Int
+  reason    String?
+
+  status LeaveStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("leaves")
 }
